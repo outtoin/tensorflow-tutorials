@@ -25,3 +25,5 @@ learning_rate = 0.1
 
 X = tf.placeholder(tf.float32, [None, sequence_length, input_dim])
 Y = tf.placeholder(tf.int32, [None, sequence_length])
+
+cell = tf.contrib.rnn.BasicLSTMCell(num_units=hidden_size, state_is_tuple=True)

@@ -4,6 +4,8 @@ from tensorflow.contrib.framework import arg_scope
 
 from tensorflow.examples.tutorials.mnist import input_data
 
+from tqdm import *
+
 tf.set_random_seed(777)
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
@@ -56,11 +58,11 @@ sess.run(tf.global_variables_initializer())
 # train
 print("epoch = {}, layer = 5, width = {}, keep_prob = {}, learning_rate = {}".format(
     training_epochs, hidden_output_size, keep_prob, learning_rate))
-for epoch in range(training_epochs):
+for epoch in tqdm(range(training_epochs)):
     avg_cost = 0
     total_batch = int(mnist.train.num_examples / batch_size)
 
-    for i in range(total_batch):
+    for i in tqdm(range(total_batch)):
         xs, ys = mnist.train.next_batch(batch_size)
         feed_dict_train = {X: xs, Y: ys, train_mode: True}
         feed_dict_cost = {X: xs, Y: ys, train_mode: False}
