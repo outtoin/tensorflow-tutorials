@@ -30,12 +30,13 @@ outputs, _states = tf.nn.dynamic_rnn(
     cell, x_one_hot, initial_state=initial_state, dtype=tf.float32)
 
 # FC layer
+'''
 X_for_fc = tf.reshape(outputs, [-1, hidden_size])
 outputs = tf.contrib.layers.fully_connected(X_for_fc, num_classes, activation_fn=None)
 
 # reshape out for sequence_loss
 outputs = tf.reshape(outputs, [batch_size, sequence_length, num_classes])
-
+'''
 weights = tf.ones([batch_size, sequence_length])
 sequence_loss = tf.contrib.seq2seq.sequence_loss(
     logits=outputs, targets=Y, weights=weights)
@@ -53,7 +54,7 @@ with tf.Session() as sess:
         # print char using dic
         result_str = [idx2char[c] for c in np.squeeze(result)]
 
-        print(i, "loss:", l, "Prediction:", ''.join(result_str))
+        print(i, "loss:", l, "\tPrediction:", ''.join(result_str))
 
 
 '''
